@@ -3,17 +3,18 @@ package pilasYColas;
 public class PilaEstatica implements Pila {
 
 	private Object[] pila;
-	private int cantidadMaxima = 10;
+	private int cantidadMaxima;
 	private int ultimoValor;
 	
-	public PilaEstatica() {
+	public PilaEstatica(int cantMax) {
+		this.cantidadMaxima = cantMax;
 		this.pila = new Object[cantidadMaxima];
 		this.ultimoValor = 0;
 	}
 	
 	@Override
 	public boolean push(Object obj) {
-		if(ultimoValor == cantidadMaxima -1)
+		if(ultimoValor == cantidadMaxima)
 			return false;
 		
 		pila[ultimoValor] = obj;
@@ -25,8 +26,8 @@ public class PilaEstatica implements Pila {
 	public Object pop() {
 		if(ultimoValor == 0)
 			return null;
-		
-		Object obj = pila[ultimoValor--];
+		ultimoValor--;
+		Object obj = pila[ultimoValor];
 		pila[ultimoValor] = null;
 		return obj;
 	}
@@ -47,6 +48,8 @@ public class PilaEstatica implements Pila {
 
 	@Override
 	public void empty() {
+		if(ultimoValor == cantidadMaxima)
+			ultimoValor--;
 		for(int i = ultimoValor ; i >= 0 ; i--) {
 			pila[i] = null;
 		}
