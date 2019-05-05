@@ -1,7 +1,7 @@
 package pilasYColas;
 
 public interface Cola {
-	public void offer();
+	public boolean offer(Object obj);
 	public Object poll();
 	public Object peek();
 	public boolean isEmpty();
