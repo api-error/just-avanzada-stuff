@@ -1,21 +1,23 @@
 package pilasYColas;
 
-public class PilaEstatica implements Pila {
+public class PilaDinamica implements Pila {
 
 	private Object[] pila;
 	private int cantidadMaxima;
 	private int ultimoValor;
 	
-	public PilaEstatica(int cantMax) {
-		this.cantidadMaxima = cantMax;
-		this.pila = new Object[cantidadMaxima];
+	
+	public PilaDinamica() {
+		pila = new Object[1];
 		this.ultimoValor = 0;
+		this.cantidadMaxima = 1;
 	}
+	
 	
 	@Override
 	public boolean push(Object obj) {
 		if(ultimoValor == cantidadMaxima)
-			return false;
+			AgrandarPila();
 		
 		pila[ultimoValor] = obj;
 		ultimoValor++;
@@ -41,7 +43,6 @@ public class PilaEstatica implements Pila {
 
 	@Override
 	public boolean isEmpty() {
-		
 		boolean isEmpty = ultimoValor == 0 && pila[0] == null ? true : false;
 		
 		return isEmpty;
@@ -49,12 +50,16 @@ public class PilaEstatica implements Pila {
 
 	@Override
 	public void empty() {
-		if(ultimoValor == cantidadMaxima)
-			ultimoValor--;
-		for(int i = ultimoValor ; i >= 0 ; i--) {
+		for(int i = ultimoValor-1 ; i >= 0 ; i--) {
 			pila[i] = null;
 		}
 		ultimoValor = 0;
-	}
 
+	}
+	private void AgrandarPila() {
+		Object[] pilaNueva = new Object[++cantidadMaxima];
+		for(int i = 0 ; i<cantidadMaxima-1; i++)
+			pilaNueva[i] = pila[i];
+		pila = pilaNueva;
+	}
 }

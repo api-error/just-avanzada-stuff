@@ -7,15 +7,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.junit.Assert;
+
+import pilasYColas.PilaDinamica;
 import pilasYColas.PilaEstatica;
 
-public class PilaEstaticaTest {
-	
-	public PilaEstatica pila;
+public class PilaDinamicaTest {
+
+	public PilaDinamica pila;
 	
 	@Before
 	public void SetUp() {
-		pila = new PilaEstatica(10);
+		pila = new PilaDinamica();
 	}
 	
 	@Test
@@ -41,12 +43,12 @@ public class PilaEstaticaTest {
 	}
 	
 	@Test
-	public void InsertaHastaElTope() {
+	public void LaPilaSeAgrandaConCadaIngreso() {
 		int numero = 0;
-		while(numero <= 9)
+		while(numero <= 100)
 			pila.push(numero++);
 		
-		Assert.assertEquals(false, pila.push(numero));
+		Assert.assertEquals(true, pila.push(numero));
 	}
 	
 	@Test
@@ -56,6 +58,16 @@ public class PilaEstaticaTest {
 		int numeroRecuperado = (int)pila.peek();
 		Assert.assertEquals(numero, numeroRecuperado);
 		Assert.assertEquals(false, pila.isEmpty());
+		
+	}
+	
+	@Test
+	public void SacaElUltimoElementoYVAciaLaPila() {
+		int numero = 0;
+		pila.push(numero);
+		int numeroRecuperado = (int)pila.pop();
+		Assert.assertEquals(numero, numeroRecuperado);
+		Assert.assertEquals(true, pila.isEmpty());
 		
 	}
 	
