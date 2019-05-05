@@ -1,7 +1,7 @@
 package pilasYColas;
 
 public interface Pila {
-	public void push();
+	public boolean push(Object obj);
 	public Object pop();
 	public Object peek();
 	public boolean isEmpty();
